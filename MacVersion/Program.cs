@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net.Http;
 
 namespace DataEncoding
 {
@@ -11,7 +12,21 @@ namespace DataEncoding
     {
         static void Main(string[] args)
         {
-            FileFromBase64();
+            //FileFromBase64();
+            string b64string = "";
+            HttpClient client = new HttpClient();
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://nowhere.winsor.edu")
+            {
+                Content = new StringContent(b64string)
+            };
+
+            request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/png");
+
+            HttpResponseMessage response = client.SendAsync(request).Result;
+
+            Console.WriteLine(response.Content.Headers.ContentType);
+
 
             Console.WriteLine("Done!");
             Console.ReadLine();
@@ -60,7 +75,7 @@ namespace DataEncoding
                 FileDataEncoder encoder = FileDataEncoder.FromBase64String(base64string);
 
                 encoder.Save(outfilePath);
-                Console.WriteLine(encoder.ToHexString());
+                //Console.WriteLine(encoder.ToHexString());
             }
         }
     }
