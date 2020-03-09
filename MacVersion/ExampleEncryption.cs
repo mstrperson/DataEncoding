@@ -119,7 +119,7 @@ namespace DataEncoding
         {
             this.privateKey = priv;
 #if SHOW_WORK
-            Console.WriteLine("Calculating Combined Key...");
+//            Console.WriteLine("Calculating Combined Key...");
 #endif
             this.combinedKey = BigPow(pub, priv);
             this.state = generator;
@@ -141,11 +141,6 @@ namespace DataEncoding
             }
 
             return temp;
-        }
-
-        private static IEnumerable<ulong> Range(ulong fromInclusive, ulong toExclusive)
-        {
-            for (ulong i = fromInclusive; i < toExclusive; i++) yield return i;
         }
 
         /// <summary>
@@ -173,7 +168,7 @@ namespace DataEncoding
 // this code only runs if you have uncommented the '#define SHOW_WORK' line at the top of this file.
 // it prints a nice arithmetic statement that lets you see the XOR at work for each pair of bytes.
 #if SHOW_WORK
-            Console.WriteLine("\t{0} {1}", Convert.ToString((char)block[0]).PadLeft(8, ' '), Convert.ToString((char)block[1]).PadLeft(8, ' '));
+            Console.WriteLine("\t       {0}        {1}", (char)block[0], (char)block[1]);
             Console.WriteLine("\t{0} {1}", Convert.ToString(block[0], 2).PadLeft(8, '0'), Convert.ToString(block[1], 2).PadLeft(8, '0'));
             Console.WriteLine("^\t{0} {1}", Convert.ToString(keyBytes[0], 2).PadLeft(8, '0'), Convert.ToString(keyBytes[1], 2).PadLeft(8, '0'));
             Console.WriteLine("__________________________________________");
