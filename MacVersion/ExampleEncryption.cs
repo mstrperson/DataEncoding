@@ -31,7 +31,7 @@ namespace DataEncoding
             get
             {
                 if(_prime == 0) 
-                    _prime = (ulong)Math.Pow(2, 31) - 1;
+                    _prime = (ulong)Math.Pow(2, 17) - 1;
                 return _prime;
             }
         }
@@ -47,7 +47,7 @@ namespace DataEncoding
             get
             {
                 if (_generator == 0) 
-                    _generator = (ulong)Math.Pow(2, 17) - 1;
+                    _generator = (ulong)Math.Pow(2, 8) - 33;
                 return _generator;
             }
         }
