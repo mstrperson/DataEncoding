@@ -13,10 +13,15 @@ namespace DataEncoding
         {
             ConsoleColor defaultColor = Console.ForegroundColor;
             Console.WriteLine("Gimme some text!");
+
             string text = Console.ReadLine();
 
             Console.WriteLine("Preparing the encoder...");
-            FileDataEncoder encoder = new FileDataEncoder(Encoding.ASCII.GetBytes(text)) { EncryptionAlgorithm = new ExampleEncryption((ulong)Math.Pow(2, 8) - 31) };
+
+            FileDataEncoder encoder = new FileDataEncoder(Encoding.ASCII.GetBytes(text))
+            {
+                EncryptionAlgorithm = new ExampleEncryption((ulong)Math.Pow(2, 8) - 31)
+            };
 
             Console.WriteLine("Beginning Encryption.\n");
             encoder.Encrypt();
