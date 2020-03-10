@@ -27,5 +27,7 @@ namespace DataEncoding
         /// Must define a block size in bytes
         /// </summary>
          int BlockSize { get; }
+
+        ulong publicKey { get; }
     }
 }

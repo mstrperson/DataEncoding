@@ -38,6 +38,26 @@ namespace DataEncoding
         /// </summary>
         private ulong seed;
 
+        public ulong publicKey => BigPow(generator, seed);
+
+        /// <summary>
+        /// Calculates (b^exp) % prime
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="exp"></param>
+        /// <returns></returns>
+        public static ulong BigPow(ulong b, ulong exp)
+        {
+            ulong temp = b;
+
+            for (ulong i = 0; i < exp; i++)
+            {
+                temp = (temp * b) % prime;
+            }
+
+            return temp;
+        }
+
         /// <summary>
         /// current internal state
         /// </summary>

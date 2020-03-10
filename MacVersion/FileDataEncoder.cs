@@ -28,6 +28,12 @@ namespace DataEncoding
             protected set;
         }
 
+
+
+        public byte[] Hash => ExampleHash.ComputeHash(RawBytes, EncryptionAlgorithm.publicKey);
+
+        public string Base64Hash => Convert.ToBase64String(this.Hash);
+
         /// <summary>
         /// Get this data represented in a Base64 string suitable for transmission over the intarwebz
         /// by the way this construction is a readonly function.  You cannot edit this property.
