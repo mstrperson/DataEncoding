@@ -19,13 +19,16 @@ namespace DataEncoding
         /// Update the state of the random bit generator
         /// </summary>
         /// <returns>unsigned long (64-bit non negative integer)</returns>
-         void UpdateState();
+        void UpdateState();
 
-         void Reset();
+        /// <summary>
+        /// Reset the state of the instance to the initialState
+        /// </summary>
+        void Reset();
 
         /// <summary>
         /// Must define a block size in bytes
         /// </summary>
-         int BlockSize { get; }
+        int BlockSize { get; }
     }
 }
