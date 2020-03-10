@@ -22,21 +22,12 @@ namespace DataEncoding
         /// <returns></returns>
         public static byte[] ComputeHash(byte[] rawData, ulong publicKey)
         {
+            RandomBitGenerator random = new RandomBitGenerator(publicKey);
+
             // Preparation:  make sure all the arrays are the correct size...
             
             byte[] output = new byte[8];
 
-            ulong tempKey = publicKey;
-            byte[] keyBytes = new byte[8];
-
-            // Fill in the provided publicKey into the output bytes as the seed.
-            for (int i = 7; i >= 0; i--)
-            {
-                keyBytes[i] = (byte)(tempKey % 256);
-
-                tempKey /= 256;
-                if (tempKey == 0) tempKey = publicKey;
-            }
 
             // Pad rawData as needed to ensure that it has an even multiple of 'totalBytes' number of bytes.
             int neededBytes = rawData.Length;
@@ -74,7 +65,7 @@ namespace DataEncoding
                 // makes it look random but is completely repeatable.
                 for (int j = 0; j < 50; j++)
                 {
-                    block = HashAdd(block, output, keyBytes);
+                    block = HashAdd(block, output, random.NextBytes(8));
                     output = PermuteBits(block);
                 }
             }
@@ -138,7 +129,7 @@ namespace DataEncoding
             }
         }
 
-        public static byte[] HashAdd(byte[] a, byte[] b, byte[] pubKey)
+        public static byte[] HashAdd(byte[] a, byte[] b, byte[] convolution)
         {
             if (a.Length != b.Length) throw new InvalidOperationException("Parameters a and b must be the same length.");
 
@@ -152,7 +143,7 @@ namespace DataEncoding
                     output[i] |= (byte)((output[i] + b[j]) % 256); // each byte gets added together, and any overflow is truncated.
                 }
 
-                output[i] = (byte)(output[i] ^ pubKey[i]);
+                output[i] = (byte)(output[i] ^ convolution[i]);
             }
 
             return output;

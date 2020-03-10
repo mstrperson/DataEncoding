@@ -36,6 +36,7 @@
     <Compile Include="FileDataEncoder.cs" />
     <Compile Include="IEncryptionAlgorithm.cs" />
     <Compile Include="ExampleEncryption.cs" />
+    <Compile Include="RandomBitGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

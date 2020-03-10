@@ -30,7 +30,7 @@ namespace DataEncoding
 
 
 
-        public byte[] Hash => ExampleHash.ComputeHash(RawBytes, EncryptionAlgorithm.publicKey);
+        public byte[] Hash => ExampleHash.ComputeHash(RawBytes, EncryptionAlgorithm.publicKey % (ulong)(Math.Pow(2, 7) - 1));
 
         public string Base64Hash => Convert.ToBase64String(this.Hash);
 

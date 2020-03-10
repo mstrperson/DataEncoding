@@ -12,7 +12,7 @@ namespace DataEncoding
         static void Main(string[] args)
         {
             string text1 = "abc";
-            string text2 = "abcasdfasdgasdfa";
+            string text2 = "abd";
 
 
 
